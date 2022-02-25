@@ -1,4 +1,19 @@
-  
+<?php
+include_once("connect.php");
+
+$idutilizator = $_GET['idutilizator'];
+
+echo $sql = "SELECT * FROM `utilizatori` WHERE id =".$idutilizator;
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_assoc($result);
+mysqli_close($con);
+
+
+echo "<pre>";
+var_dump($row);
+    ?>
+
+      
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +26,12 @@
     <!-- Content here -->
     <h1> Formular inregistrare</h1>
     <form method="post" action="http://localhost/cgaplicatie/crud/post.php"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+        <input type="hidden"name=idutilizator value="<?php echo $row[id];?>
       <div class="col-md-12">
         <label for="validationCustom01" class="form-label">Prenume</label>
         <div class="input-group has-validation">
         <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-fill"></i></span>
-        <input name="prenume" type="text" class="form-control" id="validationCustom01" value="" required>
+        <input name="prenume" type="text" class="form-control" id="validationCustom01" value="<?php echo $row['prenume']?>" required>
         <div class="valid-feedback">
           Camp completat corect.
         </div>
@@ -28,7 +44,7 @@
       <label for="validationCustom02" class="form-label">Nume</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-fill"></i></span>
-          <input name="nume" type="text" class="form-control" id="validationCustom02" value="" required>
+          <input name="nume" type="text" class="form-control" id="validationCustom02" value="<?php echo $row['nume']?>"required>
           <div class="valid-feedback">
             Camp completat corect.
           </div>
@@ -39,7 +55,7 @@
       </div>
       <div class="col-md-12">
         <label for="validationCustom03" class="form-label">Email</label>
-        <input name="email" type="email" class="form-control" id="validationCustom03" value="" required>
+        <input name="email" type="email" class="form-control" id="validationCustom03" value="<?php echo $row['email']?>"required>
         <div class="valid-feedback">
           Camp completat corect.
         </div>
@@ -47,32 +63,11 @@
           Adresa de mail este in format invalid!
         </div>
       </div>
-      <div class="col-md-12">
-        <label for="parola" class="form-label">Parola</label>
-        <input name="parola" type="password" class="form-control" id="parola" value="" required>
-
-        <div class="valid-feedback">
-          Camp completat corect.
-        </div>
-        <div class="invalid-feedback">
-          Campul este obligatoriu!
-        </div>
-      </div>
-      <div class="col-md-12">
-        <label for="parola2" class="form-label">Confirma Parola</label>
-        <input name="parola2" type="password" class="form-control" id="parola2" value="" required>
-
-        <div class="valid-feedback">
-          Campnu este completat corect.
-        </div>
-        <div class="invalid-feedback">
-          Confirmare Parola nu coincide cu Parola
-        </div>
-      </div>
+      
       <div class="col-md-12">
         <label for="validationCustom05" class="form-label">Data nastere</label>
 
-        <input name="datanastere" type="date" class="form-control" id="validationCustom05" value="" required>
+        <input name="datanastere" type="date" class="form-control" id="validationCustom05" value="<?php echo $row['datanastere']?>"required>
         <div class="valid-feedback">
           Camp completat corect.
         </div>
@@ -84,9 +79,9 @@
         <label for="validationCustom06" class="form-label">Sex</label>
         <select name="sex" class="form-select" id="validationCustom06" required>
           <option selected value="">Selecteaza...</option>
-          <option value="m">M</option>
-          <option value="f">F</option>
-          <option value="n">N</option>
+          <option value="m"<?php if($row['sex']=='m'):?> selected <?php endif;?>>M</option>
+          <option value="f"<?php if($row['sex']=='m'):?> selected <?php endif;?>>F</option>
+          <option value="n"<?php if($row['sex']=='m'):?> selected <?php endif;?>>N</option>
         </select>
         <div class="valid-feedback">
           Camp completat corect.
@@ -97,7 +92,7 @@
       </div>
       <div class="col-md-12">
         <label for="validationCustom07" class="form-label">Telefon</label>
-        <input name="telefon" type="tel" class="form-control" id="validationCustom07" value="" required>
+        <input name="telefon" type="tel" class="form-control" id="validationCustom07" value="<?php echo $row['telefon']?>"required>
         <div class="valid-feedback">
           Camp completat corect.
         </div>
@@ -108,7 +103,7 @@
 
       <div class="col-md-12">
         <label for="formFile" class="form-label">Poza</label>
-        <input name="poza" class="form-control" type="file" id="formFile" required> 
+        <input name="poza" class="form-control" type="file" id="formFile" <?php echo $row  ['nume']?>required> 
         <div class="valid-feedback">
           Camp completat corect.
         </div>
