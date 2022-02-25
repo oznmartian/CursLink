@@ -26,7 +26,7 @@ var_dump($row);
     <!-- Content here -->
     <h1> Formular inregistrare</h1>
     <form method="post" action="http://localhost/cgaplicatie/crud/post.php"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
-        <input type="hidden"name=idutilizator value="<?php echo $row[id];?>
+        <input type="hidden"name=idutilizator value="<?php echo $row[id];?"">
       <div class="col-md-12">
         <label for="validationCustom01" class="form-label">Prenume</label>
         <div class="input-group has-validation">
